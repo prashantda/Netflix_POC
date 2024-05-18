@@ -1,0 +1,24 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Bfl.Netflix_Movies.Core.Protos";
+
+service GrpcAllCastsOrCategories {
+
+	rpc GetAllCastsOrCategories (GetAllCastsOrCategoryRequest) returns (MultipleResponses);
+
+}
+
+message GetAllCastsOrCategoryRequest{
+	string needed=1;
+}
+
+message  GetAllCastsOrCategoryResponse {
+	string id = 1;
+	string name = 2 ;
+}
+
+message MultipleResponses{
+	repeated GetAllCastsOrCategoryResponse castsorcategories = 1;
+
+}
+

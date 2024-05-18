@@ -1,0 +1,50 @@
+.navbar-transparent {
+  position: fixed;
+  z-index:2;
+  background-color: transparent !important;
+  transition: background-color 1s;
+}
+.navbar-colored {
+  position: fixed;
+  z-index:2;
+  background-color: black !important;
+  transition: background-color 1s;
+  
+}
+.netflix_image{
+  height: 2rem;
+  width: 5rem;
+  margin-left: 2.5rem;
+}
+.search-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: width 0.3s, transform 5s;
+  transform-origin: left; 
+}
+.search{
+  background-color: transparent;
+
+}
+.imag{
+  height: 2rem;
+  width: 2rem;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+}
+
+
+
+.dropdown-menu {
+  min-width: 40px;
+}
+
+

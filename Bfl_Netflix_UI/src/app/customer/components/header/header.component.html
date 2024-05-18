@@ -1,0 +1,74 @@
+<nav
+  [ngClass]="{'navbar': true,'w-100':true, 'navbar-transparent': isNavbarTransparent, 'navbar-colored': !isNavbarTransparent, 'navbar-expand-lg': true}">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../../../../assets/Images/Netflix_Logo.svg" class="netflix_image">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">TV Shows</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">New & Popular</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">My List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white text-sm">Browse By Languages</a>
+        </li>
+
+      </ul>
+
+
+
+
+
+
+    </div>
+    <div class="ml-auto">
+      <ul class="navbar-nav">
+        <div [ngClass]="{'search-box':!isSearchClicked,'mt-1':true}" id="search-box">
+          <input type="text" class="search">
+        </div>
+        <li class="nav-item mt-2 search-icon "  (click)="toggleSearch()">
+          <a class="bi bi-search" ></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white">Children</a>
+        </li>
+
+      
+        <a class="navbar-brand" href="#">
+          <img src="../../../../assets/Images/Kids.png" alt="Logo" class="rounded-circle logo-img imag">
+        </a>
+        
+        <div class="dropdown ml-auto">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            
+          </a>
+        
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#">Link 1</a>
+            <a class="dropdown-item" href="#">Link 2</a>
+            <a class="dropdown-item" href="#">Link 3</a>
+          </div>
+        </div>
+   
+
+
+      </ul>
+    </div>
+  </div>
+</nav>

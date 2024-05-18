@@ -1,0 +1,22 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["Bfl.Netflix_Movies/Bfl.Netflix_Movies.csproj", "Bfl.Netflix_Movies/"]
+COPY ["Bfl.Netflix_Movies.Infrastructure/Bfl.Netflix_Movies.Infrastructure.csproj", "Bfl.Netflix_Movies.Infrastructure/"]
+COPY ["Bfl.Netflix_Movies.Core/Bfl.Netflix_Movies.Core.csproj", "Bfl.Netflix_Movies.Core/"]
+COPY ["Configurations/Configurations.csproj", "Configurations/"]
+RUN dotnet restore "Bfl.Netflix_Movies/Bfl.Netflix_Movies.csproj"
+COPY . .
+WORKDIR "/src/Bfl.Netflix_Movies"
+RUN dotnet build "Bfl.Netflix_Movies.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Bfl.Netflix_Movies.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Bfl.Netflix_Movies.dll"]

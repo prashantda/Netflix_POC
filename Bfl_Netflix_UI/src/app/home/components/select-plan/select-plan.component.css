@@ -1,0 +1,15 @@
+body{
+    background-color: aliceblue;
+}
+.container-my{
+  margin-right: 30%;
+    margin-left: 30%;
+}
+.large{
+  font-size: 200%;
+}
+.checkmark::before {
+  content: '\2713'; /* Unicode value of the check symbol */
+  color: rgb(109, 59, 227);
+  font-size: 24px;
+}

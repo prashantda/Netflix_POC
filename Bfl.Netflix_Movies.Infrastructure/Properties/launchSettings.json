@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Bfl.Netflix_Service1.Infrastructure": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56076;http://localhost:56078"
+    }
+  }
+}

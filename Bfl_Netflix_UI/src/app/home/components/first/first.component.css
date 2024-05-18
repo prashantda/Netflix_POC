@@ -1,0 +1,52 @@
+.index-component {
+    background-image: url('../../../../assets/Images/Index.jpg');
+    background-size: cover; 
+    height: 100vh;
+    width: 100%;
+  }
+  .index-component::before,
+  .index-component::after {
+    content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 90%);
+  z-index: -0.5;
+  }
+  .index-component img {
+    
+    margin-top: 5%;
+    margin-left: 10%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    overflow: hidden;
+    height: 40%;
+  }
+  .signin {
+   
+    z-index: 1;   
+    font-size: 100%; 
+    background-color: rgb(229, 9, 20);
+    
+   
+  }
+  
+.h1font{
+  font-size: 350%;
+  margin-top: 20vh;
+}
+ 
+.h2font{
+  font-size: 200%;
+}
+
+.margindiv{
+  height: 10%;
+  width:20%
+}
+  
+
+
+ 

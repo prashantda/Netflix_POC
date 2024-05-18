@@ -1,0 +1,32 @@
+.mybody{
+    color: rgb(229, 9, 20);
+
+}
+.hfont{
+font-size: 140%;
+}
+
+.forminput{
+   
+    width: 80%;
+    margin-left: 10%;
+
+}
+.formbutton{
+    background-color: rgb(229, 9, 20);
+    margin-left: 2%;
+    width: 16%;
+   
+    z-index: 1;
+    color: white;
+}
+.search{
+    width:60% ;
+    z-index: 1;
+    margin-left: 10%;
+}
+.form-control::placeholder {
+    font-size: 100%; /* adjust as needed */
+    color: white;
+    
+  }

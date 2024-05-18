@@ -1,0 +1,27 @@
+<div class="index-component ">
+
+  
+    <div class="d-flex justify-content-between align-items-center">
+
+      <img src="../../../../assets/Images/Netflix_Logo.svg" class="col-2 ">
+      
+        <span class=" btn  signin  text-white col-1 "
+         style="margin-right: 10%;" value="SignIn"
+          *ngIf="show" (click)="SignIn('/signin')">SignIn</span>
+      
+    </div>
+    
+
+
+  <div class="conatiner" *ngIf="show">
+    <div class="text-center text-white h1font fw-bold">
+      Unlimited movies, TV shows and more</div>
+    <div class="text-white text-center h2font">Watch anywhere. Cancel anytime.</div>
+  </div>
+
+  <div class="container " *ngIf="show">
+    <app-getstarted></app-getstarted>
+  </div>
+
+
+</div>

@@ -1,0 +1,40 @@
+body{
+    background-color: aliceblue;
+}
+ 
+  .imga img {
+    
+    margin-top: 5%;
+    margin-left: 10%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    overflow: hidden;
+    height: 40%;
+  }
+  
+  .small{
+font-size: 75%;
+  }
+  .large{
+    font-size: 190%;
+
+  }
+.h1font{
+  font-size: 350%;
+  margin-top: 20vh;
+}
+ 
+.h2font{
+  font-size: 130%;
+}
+
+.tagheight{
+ height: 20%;
+}
+.buttoncolor{
+  background-color:  rgb(229, 9, 20);
+}
+  
+
+
+ 

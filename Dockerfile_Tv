@@ -1,0 +1,27 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["Bfl.Netflix_Tv/Bfl.Netflix_Tv.csproj", "Bfl.Netflix_Tv/"]
+COPY ["Bfl.Netflix_Tv.Core/Bfl.Netflix_Tv.Core.csproj", "Bfl.Netflix_Tv.Core/"]
+COPY ["Bfl.Netflix_Tv.Infrastructure/Bfl.Netflix_Tv.Infrastructure.csproj", "Bfl.Netflix_Tv.Infrastructure/"]
+COPY ["Configurations/Configurations.csproj", "Configurations/"]
+
+RUN dotnet restore "Bfl.Netflix_Tv/Bfl.Netflix_Tv.csproj"
+COPY . .
+
+WORKDIR /src
+COPY ["Bfl.Netflix_Tv/wwwroot/NetflixTvShow.sql", "Bfl.Netflix_Tv/wwwroot/"]
+
+WORKDIR "/src/Bfl.Netflix_Tv"
+RUN dotnet build "Bfl.Netflix_Tv.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "Bfl.Netflix_Tv.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "Bfl.Netflix_Tv.dll"]

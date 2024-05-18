@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: movies-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviesservice
+  template:
+    metadata:
+      labels:
+        app: moviesservice
+    spec:
+      containers:
+        - name: moviesservice
+          image: prashantdarade1697/moviesservice
+          env:
+          - name: HOST
+            value: "mssql-clusterip"
+          - name: DATABASE
+            value: "Netflix"
+          - name: USERID
+            value: "sa"
+          - name: GRPCURL
+            value: "movies-clusterip"           
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mssql
+                key: SA_PASSWORD
+          - name: RABBITMQ
+            value: "rabbitmq-clusterip"
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: movies-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: moviesservice
+  ports:
+   - name: moviesservice
+     protocol: TCP
+     port: 80
+     targetPort: 80
+   - name: moviesgrpc
+     protocol: TCP
+     port: 6769
+     targetPort: 6769

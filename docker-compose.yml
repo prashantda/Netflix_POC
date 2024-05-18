@@ -1,0 +1,78 @@
+version: '3.4'
+
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  broker:
+    image: confluentinc/cp-kafka:latest
+    container_name: broker
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://broker:29092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+           
+  rabbitmqservice:
+    image: rabbitmq:3.11-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  mssql: 
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Prashant@123"
+    ports:
+      - "1433:1433"
+    volumes:
+      - P:\Bajaj\Programs\Database:/var/opt/mssql/data
+      
+  moviesservice:
+    image: prashantdarade1697/moviesservice
+    environment:
+      HOST: "mssql"
+      DATABASE: "Netflix"
+      USERID: "sa"
+      PASSWORD: "Prashant@123"
+      RABBITMQ: "rabbitmqservice"
+      KAFKASERVER: "broker"
+    ports:
+      - "5069:80"
+    depends_on:
+      - rabbitmqservice
+      - mssql
+
+  tvservice:
+    image: prashantdarade1697/tvservice
+    environment:
+      HOST: "mssql"
+      DATABASE: "Netflix"
+      USERID: "sa"
+      PASSWORD: "Prashant@123"
+      CLIENTHOST: moviesservice
+      RABBITMQ: "rabbitmqservice"
+      KAFKASERVER: "broker"
+      GRPCURL: "moviesservice"
+    ports:
+      - "5225:80"
+    depends_on:
+      - rabbitmqservice
+      - mssql
+
+
+
+   

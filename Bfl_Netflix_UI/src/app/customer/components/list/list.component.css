@@ -1,0 +1,13 @@
+.image-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .image-item {
+    width: 200px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    margin: 10px;
+  }
+  

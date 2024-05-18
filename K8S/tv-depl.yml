@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: tv-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tvservice
+  template:
+    metadata:
+      labels:
+        app: tvservice
+    spec:
+      containers:
+        - name: tvservice
+          image: prashantdarade1697/tvservice
+          env:
+          - name: HOST
+            value: "mssql-clusterip"
+          - name: CLIENTHOST
+            value: "movies-clusterip"
+          - name: DATABASE
+            value: "Netflix"
+          - name: USERID
+            value: "sa"
+          - name: GRPCURL
+            value: "movies-clusterip"          
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mssql
+                key: SA_PASSWORD
+          - name: RABBITMQ
+            value: "rabbitmq-clusterip"
+
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: tv-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: tvservice
+  ports:
+   - name: tvservice
+     protocol: TCP
+     port: 80
+     targetPort: 80
